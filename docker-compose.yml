@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  fuckgeo-web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: fuckgeo-portal
+    restart: always
+    ports:
+      - "80:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - fuckgeo-network
+
+networks:
+  fuckgeo-network:
+    driver: bridge
