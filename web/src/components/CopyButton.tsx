@@ -12,11 +12,34 @@ export default function CopyButton({ text, label }: { text: string; label: strin
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(text);
+      // 优先尝试现代 Clipboard API
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        // 兼容非 HTTPS 或旧版浏览器的 fallback 方案
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        
+        // 确保 textarea 在移动端不会引起页面跳动或滚动
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "0";
+        document.body.appendChild(textArea);
+        
+        textArea.focus();
+        textArea.select();
+        
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        if (!successful) throw new Error('execCommand copy failed');
+      }
+      
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy: ', err);
+      alert('复制失败，请手动选择文本复制');
     }
   };
 
