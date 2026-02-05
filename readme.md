@@ -55,6 +55,28 @@ GEO 的进化速度极快，靠一个人的力量无法对抗整个营销工业�
 
 ---
 
+## 🛠️ 部署与更新 (Deployment & Update)
+
+为了方便在 Linux 服务器上快速部署，项目提供了自动化脚本：
+
+### 1. 首次部署
+```bash
+git clone https://github.com/xinxinrana/FuckGEO.git
+cd FuckGEO
+chmod +x quick-start.sh
+./quick-start.sh
+```
+
+### 2. 自动更新
+当你本地代码推送到 GitHub 后，在服务器上只需运行：
+```bash
+chmod +x update.sh
+./update.sh
+```
+该脚本会自动执行：`git pull` -> `构建镜像` -> `重启容器`。
+
+---
+
 ## ⚖️ 许可证 (License)
 
 本项目采用 [MIT License](LICENSE)，我们拥护彻底的开源与自由。

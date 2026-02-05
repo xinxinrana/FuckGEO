@@ -8,7 +8,7 @@ echo "🚀 正在准备启动 FuckGEO..."
 if command -v docker-compose >/dev/null 2>&1; then
     echo "✅ 检测到 Docker Compose，将使用容器化方案（推荐：环境隔离，不污染系统）"
     docker-compose up -d --build
-    echo "🎉 启动成功！请访问 http://localhost"
+    echo "🎉 启动成功！请访问 http://localhost:3005"
 else
     echo "⚠️ 未检测到 Docker，尝试使用 Node.js 直接运行..."
     
